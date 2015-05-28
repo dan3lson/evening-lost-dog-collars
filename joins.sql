@@ -35,39 +35,36 @@ WHERE dog_owners.dog_name IS NULL
 -- (3 rows)
 
 -- 3) We need to see all collars, with an owner, if one matches.
-SELECT lost_dog_collars.dog_name AS collars, dog_owners.dog_name AS owners
+SELECT lost_dog_collars.dog_name AS collars, dog_owners.name AS owners
 FROM dog_owners
-FULL OUTER JOIN lost_dog_collars
+RIGHT JOIN lost_dog_collars
 ON dog_owners.dog_name = lost_dog_collars.dog_name
 ;
 -- collars | owners
 -- ---------+---------
--- Boogie  | Boogie
+-- Boogie  | Evan
 -- Lassie  |
--- Gilly   | Gilly
--- Lilly   | Lilly
+-- Gilly   | Whitney
+-- Lilly   | Spencer
 -- Fido    |
--- Linux   | Linux
--- Bronson | Bronson
+-- Linux   | Dan
+-- Bronson | Omid
 -- Goose   |
---         | Apple
--- (9 rows)
+-- (8 rows)
+
 
 -- 4) We need to see all owners, with collars in the Lost and Found, if one matches.
 SELECT dog_owners.name AS owners, lost_dog_collars.dog_name AS collars
 FROM dog_owners
-FULL OUTER JOIN lost_dog_collars
+LEFT JOIN lost_dog_collars
 ON dog_owners.dog_name = lost_dog_collars.dog_name
 ;
 -- owners  | collars
 -- ---------+---------
 -- Evan    | Boogie
---         | Lassie
 -- Whitney | Gilly
 -- Spencer | Lilly
---         | Fido
 -- Dan     | Linux
 -- Omid    | Bronson
---         | Goose
 -- Dan     |
--- (9 rows)
+-- (6 rows)
